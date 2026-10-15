@@ -78,7 +78,7 @@
   </style>
 </head>
 <body>
-  <h1>🚀 Mi PWA Suma</h1>
+  <h1>🚀 Suma 🚀 </h1>
   <p>Introduce dos números para sumarlos</p>
 
   <div class="card">
@@ -88,26 +88,10 @@
     <div id="resultado"></div>
   </div>
 
-  <p id="estado">Cargando...</p>
+  <p id="estado">Cargando... Data 🚀</p>
 
   <script src="suma.js"></script>
-  <script>
-    // Registrar el Service Worker
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-          .then(reg => {
-            console.log('✅ Service Worker registrado:', reg.scope);
-            document.getElementById('estado').textContent = '✅ PWA lista (offline disponible)';
-          })
-          .catch(err => {
-            console.error('❌ Error al registrar SW:', err);
-            document.getElementById('estado').textContent = '⚠️ Service Worker no disponible';
-          });
-      });
-    } else {
-      document.getElementById('estado').textContent = '⚠️ Tu navegador no soporta Service Workers';
-    }
-  </script>
+  <script src="serviceWorker.js"></script>
+
 </body>
 </html>
