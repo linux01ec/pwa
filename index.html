@@ -1,55 +1,85 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hola Mundo PWA</title>
-    
-    <!-- Enlace al manifiesto físico -->
-    <link rel="manifest" href="/sumadora/manifest.json">
-    <meta name="theme-color" content="#2196F3">
-
-    <style>
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        h1 {
-            font-size: 2.5rem;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d6efd">
+  <title>Mi PWA Hola Mundo</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0d6efd, #6610f2);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 { font-size: 2rem; margin-bottom: 1rem; }
+    p { margin-bottom: 2rem; opacity: 0.9; }
+    button {
+      background: white;
+      color: #0d6efd;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    button:active { transform: translateY(0); }
+    #estado {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+  </style>
 </head>
 <body>
+  <h1>🚀 Mi PWA</h1>
+  <p>Una Progressive Web App con HTML y JS puro</p>
+  <button id="btnHola">Saludar</button>
+  <p id="estado">Cargando...</p>
 
-    <h1>Hola Mundo</h1>
+  <script>
+    // Mostrar alerta "Hola Mundo" al cargar la página
+    window.addEventListener('load', () => {
+      alert('¡Hola Mundo!');
+    });
 
-    <script>
-        // Registrar el Service Worker de manera limpia (también generado por Blob para mantenerlo 100% en el HTML)
-        if ('serviceWorker' in navigator) {
-            const swCode = `
-                const CACHE_NAME = 'hola-v1';
-                self.addEventListener('install', e => {
-                    self.skipWaiting();
-                });
-                self.addEventListener('fetch', e => {
-                    e.respondWith(
-                        caches.match(e.request).then(response => {
-                            return response || fetch(e.request);
-                        })
-                    );
-                });
-            `;
-            const swBlob = new Blob([swCode], {type: 'application/javascript'});
-            navigator.serviceWorker.register(URL.createObjectURL(swBlob))
-                .then(() => console.log('Service Worker registrado correctamente'))
-                .catch(err => console.log('Error en Service Worker', err));
-        }
-    </script>
+    // También se puede repetir con el botón
+    document.getElementById('btnHola').addEventListener('click', () => {
+      alert('¡Hola Mundo!');
+    });
+
+    // Registrar el Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js')
+          .then(reg => {
+            console.log('✅ Service Worker registrado:', reg.scope);
+            document.getElementById('estado').textContent = '✅ PWA lista (offline disponible)';
+          })
+          .catch(err => {
+            console.error('❌ Error al registrar SW:', err);
+            document.getElementById('estado').textContent = '⚠️ Service Worker no disponible';
+          });
+      });
+    } else {
+      document.getElementById('estado').textContent = '⚠️ Tu navegador no soporta Service Workers';
+    }
+  </script>
 </body>
 </html>
