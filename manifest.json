@@ -1,15 +1,10 @@
 {
-    "name": "Sumadora Simple",
-    "short_name": "sumadora",
-    "start_url": "./index.html",
+    "name": "Hola Mundo PWA",
+    "short_name": "HolaMundo",
+    "start_url": "/sumadora/index.html",
+    "scope": "/sumadora/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#2196F3",
-    "icons": [
-      {
-        "src": "icon.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      }
-    ]
-  }
+    "icons": []
+}

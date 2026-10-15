@@ -1,47 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora</title>
+    <title>Hola Mundo PWA</title>
     
-    <!-- Enlace al manifiesto de la PWA -->
-    <link rel="manifest" href="manifest.json">
-    <!-- Color de la barra de notificaciones en Android -->
+    <!-- Enlace al manifiesto físico -->
+    <link rel="manifest" href="/sumadora/manifest.json">
     <meta name="theme-color" content="#2196F3">
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            font-size: 2.5rem;
+        }
+    </style>
 </head>
-
 <body>
-    <div>
-        <label for="num1">Numero 1</label>
-        <input type="number" name="num1" id="num1">
-    </div>
-    <br>
-    <div>
-        <label for="num2">Numero 2</label>
-        <input type="number" name="num2" id="num2">
-    </div>
-    <br>
-    <!-- Le pusimos un ID al botón para controlarlo limpiamente desde JS -->
-    <button id="btnSumar">Sumar</button>
-    <br><br>
-    <div>
-        <label for="resultado">Resultado</label>
-        <input readonly type="number" name="resultado" id="resultado">
-    </div>
 
-    <!-- Tu archivo JS separado -->
-    <script src="sumadora.js"></script>
+    <h1>Hola Mundo</h1>
 
-    <!-- Script para registrar la PWA -->
     <script>
+        // Registrar el Service Worker de manera limpia (también generado por Blob para mantenerlo 100% en el HTML)
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
-                .then(() => console.log('Service Worker registrado con éxito'))
-                .catch(err => console.log('Error al registrar el Service Worker', err));
+            const swCode = `
+                const CACHE_NAME = 'hola-v1';
+                self.addEventListener('install', e => {
+                    self.skipWaiting();
+                });
+                self.addEventListener('fetch', e => {
+                    e.respondWith(
+                        caches.match(e.request).then(response => {
+                            return response || fetch(e.request);
+                        })
+                    );
+                });
+            `;
+            const swBlob = new Blob([swCode], {type: 'application/javascript'});
+            navigator.serviceWorker.register(URL.createObjectURL(swBlob))
+                .then(() => console.log('Service Worker registrado correctamente'))
+                .catch(err => console.log('Error en Service Worker', err));
         }
     </script>
 </body>
-
 </html>
