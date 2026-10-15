@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0d6efd">
-  <title>Mi PWA Hola Mundo</title>
+  <title>Mi PWA Suma</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon-192.png">
   <link rel="apple-touch-icon" href="icon-192.png">
@@ -24,6 +24,28 @@
     }
     h1 { font-size: 2rem; margin-bottom: 1rem; }
     p { margin-bottom: 2rem; opacity: 0.9; }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 24px;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    input {
+      padding: 12px 14px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      text-align: center;
+    }
+
     button {
       background: white;
       color: #0d6efd;
@@ -40,6 +62,14 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
     button:active { transform: translateY(0); }
+
+    #resultado {
+      margin-top: 1rem;
+      font-size: 1.5rem;
+      font-weight: 700;
+      min-height: 2rem;
+    }
+
     #estado {
       margin-top: 1.5rem;
       font-size: 0.85rem;
@@ -48,22 +78,20 @@
   </style>
 </head>
 <body>
-  <h1>🚀 Mi PWA</h1>
-  <p>Una Progressive Web App con HTML y JS puro</p>
-  <button id="btnHola">Saludar</button>
+  <h1>🚀 Mi PWA Suma</h1>
+  <p>Introduce dos números para sumarlos</p>
+
+  <div class="card">
+    <input type="number" id="num1" placeholder="Primer número" step="any">
+    <input type="number" id="num2" placeholder="Segundo número" step="any">
+    <button id="btnSumar">Sumar</button>
+    <div id="resultado"></div>
+  </div>
+
   <p id="estado">Cargando...</p>
 
+  <script src="suma.js"></script>
   <script>
-    // Mostrar alerta "Hola Mundo" al cargar la página
-    window.addEventListener('load', () => {
-      alert('¡Hola Mundo!');
-    });
-
-    // También se puede repetir con el botón
-    document.getElementById('btnHola').addEventListener('click', () => {
-      alert('¡Hola Mundo!');
-    });
-
     // Registrar el Service Worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {

@@ -2,6 +2,7 @@ const CACHE_NAME = 'pwa-hola-v1';
 const ASSETS = [
   './',
   './index.html',
+  './suma.js', 
   './manifest.json',
   './icon-192.png',
   './icon-512.png'
