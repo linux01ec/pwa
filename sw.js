@@ -1,4 +1,4 @@
-const CACHE_NAME = 'pwa-hola-v4'; // subimos versión por los cambios
+const CACHE_NAME = 'pwa-hola-v5'; // subimos versión por los cambios
 const ASSETS = [
   './',
   './index.html',
