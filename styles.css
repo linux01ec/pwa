@@ -1,3 +1,74 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0d6efd, #6610f2);
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 { font-size: 2rem; margin-bottom: 1rem; }
+p { margin-bottom: 2rem; opacity: 0.9; }
+
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 24px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 320px;
+}
+
+input {
+  padding: 12px 14px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  text-align: center;
+}
+
+button {
+  background: white;
+  color: #0d6efd;
+  border: none;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+button:active { transform: translateY(0); }
+
+#resultado {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  min-height: 2rem;
+}
+
+#estado {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
 /* ===== Banner de instalación ===== */
 .banner {
   position: fixed;
@@ -18,7 +89,7 @@
   animation: slideDown 0.4s ease-out;
 }
 
-/* 🔑 ESTA ES LA REGLA CLAVE que faltaba */
+/* 🔑 ESTA REGLA ES LA CLAVE PARA QUE DESAPAREZCA */
 .banner[hidden] {
   display: none !important;
 }
