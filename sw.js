@@ -1,14 +1,15 @@
-const CACHE_NAME = 'pwa-hola-v1';
+const CACHE_NAME = 'pwa-hola-v4'; // subimos versión por los cambios
 const ASSETS = [
   './',
   './index.html',
-  './suma.js', 
+  './styles.css',
+  './app.js',
+  './suma.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png'
 ];
 
-// Instalación: cachear archivos
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -17,7 +18,6 @@ self.addEventListener('install', event => {
   );
 });
 
-// Activación: limpiar cachés antiguos
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys =>
@@ -28,7 +28,6 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch: servir desde caché, si falla ir a red
 self.addEventListener('fetch', event => {
   event.respondWith(
     caches.match(event.request).then(response => {
